@@ -69,6 +69,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m < LATITUDEMIN || m > LATITUDEMAX)
             return false;
         latitudeMin_ = m;
+    } else {
+        latitudeMin_ = LATITUDEMIN;
     }
 
     if (!latitudeMax.empty()) {
@@ -76,6 +78,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m < LATITUDEMIN || m > LATITUDEMAX)
             return false;
         latitudeMax_ = m;
+    } else {
+        latitudeMax_ = LATITUDEMAX;
     }
 
     if (!longtitudeMin.empty()) {
@@ -83,6 +87,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m < LONGTITUDEMIN || m > LONGTITUDEMAX)
             return false;
         longtitudeMin_ = m;
+    } else {
+        longtitudeMin_ = LONGTITUDEMIN;
     }
 
     if (!longtitudeMax.empty()) {
@@ -90,14 +96,20 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m < LONGTITUDEMIN || m > LONGTITUDEMAX)
             return false;
         longtitudeMax_ = m;
+    } else {
+        longtitudeMax_ = LONGTITUDEMAX;
     }
 
     if (!v.empty()) {
         vendor_ = v;
+    } else {
+        vendor_ = VENDORANY;
     }
 
     if (!m.empty()) {
         model_ = m;
+    } else {
+        model_ = MODELANY;
     }
 
     if (!widthMin.empty()) {
@@ -105,6 +117,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m > WIDTHMAX)
             return false;
         widthMin_ = m;
+    } else {
+        widthMin_ = WIDTHMIN;
     }
 
     if (!widthMax.empty()) {
@@ -112,6 +126,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m > WIDTHMAX)
             return false;
         widthMax_ = m;
+    } else {
+        widthMax_ = WIDTHMAX;
     }
 
     if (!heightMin.empty()) {
@@ -119,6 +135,8 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m > HEIGHTMAX)
             return false;
         heightMin_ = m;
+    } else {
+        heightMin_ = HEIGHTMIN;
     }
 
     if (!heightMax.empty()) {
@@ -126,46 +144,56 @@ bool Filter::setFilter(std::string latitudeMin, std::string latitudeMax,
         if (m > HEIGHTMAX)
             return false;
         heightMax_ = m;
+    } else {
+        heightMax_ = HEIGHTMAX;
     }
 
     if (!dateMin.empty()) {
-        if (dateMin.size() != 8)
+        if (dateMin.size() != 10)
             return false;
-        if (dateMin.at(2) != ':' || dateMin.at(5) != ':')
+        if (dateMin.at(4) != ':' || dateMin.at(7) != ':')
             return false;
         if (dateMin < DATEMIN || dateMin > DATEMAX)
             return false;
         dateMin_ = dateMin;
+    } else {
+        dateMin_ = DATEMIN;
     }
 
     if (!dateMax.empty()) {
-        if (dateMax.size() != 8)
+        if (dateMax.size() != 10)
             return false;
-        if (dateMax.at(2) != ':' || dateMax.at(5) != ':')
+        if (dateMax.at(4) != ':' || dateMax.at(7) != ':')
             return false;
         if (dateMax < DATEMIN || dateMax > DATEMAX)
             return false;
         dateMax_ = dateMax;
+    } else {
+        dateMax_ = DATEMAX;
     }
 
     if (!timeMin.empty()) {
-        if (timeMin.size() != 10)
+        if (timeMin.size() != 8)
             return false;
-        if (timeMin.at(4) != ':' || timeMin.at(7) != ':')
+        if (timeMin.at(2) != ':' || timeMin.at(5) != ':')
             return false;
         if (timeMin < TIMEMIN || timeMin > TIMEMAX)
             return false;
         timeMin_ = timeMin;
+    } else {
+        timeMin_ = TIMEMIN;
     }
 
     if (!timeMax.empty()) {
-        if (timeMax.size() != 10)
+        if (timeMax.size() != 8)
             return false;
-        if (timeMax.at(4) != ':' || timeMax.at(7) != ':')
+        if (timeMax.at(2) != ':' || timeMax.at(5) != ':')
             return false;
         if (timeMax < TIMEMIN || timeMax > TIMEMAX)
             return false;
         timeMax_ = timeMax;
+    } else {
+        timeMax_ = TIMEMAX;
     }
 
     return true;

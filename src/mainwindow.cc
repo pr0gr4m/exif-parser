@@ -4,6 +4,7 @@
 
 #include <QFileDialog>
 #include <QString>
+#include <QMessageBox>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -66,7 +67,7 @@ void MainWindow::on_btnOpen_clicked()
 
 void MainWindow::on_btnApply_clicked()
 {
-    Filter::getInstance()->setFilter(
+    if (!Filter::getInstance()->setFilter(
                 ui->lineLatitudeMin->text().toStdString(),
                 ui->lineLatitudeMax->text().toStdString(),
                 ui->lineLongtitudeMin->text().toStdString(),
@@ -80,6 +81,11 @@ void MainWindow::on_btnApply_clicked()
                 ui->lineDateMin->text().toStdString(),
                 ui->lineDateMax->text().toStdString(),
                 ui->lineTimeMin->text().toStdString(),
-                ui->lineTimeMax->text().toStdString());
+                ui->lineTimeMax->text().toStdString())) {
+        // alert
+        QMessageBox errorMessage;
+        errorMessage.critical(0, "Filter Error", "Filter Format Error!");
+        errorMessage.setFixedSize(500, 200);
+    }
     displayList();
 }
