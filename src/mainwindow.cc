@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include "filter.hh"
+#include "exifwidget.hh"
 
 #include <QFileDialog>
 #include <QString>
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->listFiles->setSelectionMode(QListWidget::MultiSelection);
 }
 
 MainWindow::~MainWindow()
@@ -88,4 +90,17 @@ void MainWindow::on_btnApply_clicked()
         errorMessage.setFixedSize(500, 200);
     }
     displayList();
+}
+
+void MainWindow::on_btnDetail_clicked()
+{
+    QList<QListWidgetItem*> items = ui->listFiles->selectedItems();
+    QList<QListWidgetItem*>::iterator it;
+    QStringList list;
+    for (it = items.begin(); it != items.end(); it++) {
+        list << (*it)->text();
+    }
+
+    ExifWidget *newWidget = new ExifWidget(list);
+    newWidget->show();
 }

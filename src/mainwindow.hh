@@ -23,6 +23,8 @@ private slots:
 
     void on_btnApply_clicked();
 
+    void on_btnDetail_clicked();
+
 private:
     void displayList();
 
